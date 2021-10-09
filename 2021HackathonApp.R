@@ -13,6 +13,12 @@ library(shiny)
 library(spDataLarge)
 library(RColorBrewer)
 
+setwd("~/Downloads/LIHTC")
+
+LIHTCPUB <- read_csv("LIHTCPUB.CSV")
+dat <- LIHTCPUB
+remove(LIHTCPUB)
+
 #Filters to only Tennessee
 nashdat <- dat %>%
   filter(proj_st=="TN")
@@ -38,7 +44,8 @@ nashdat <- nashdat%>%
 r_colors <- rgb(t(col2rgb(colors()) / 255))
 names(r_colors) <- colors()
 
-
+#Change project name
+names(nashdat)[names(nashdat)=='project']<-"projectname"
 
 # Define UI ----
 ui <- fluidPage(
@@ -58,14 +65,16 @@ server <- function(input, output, session) {
       addTiles() %>%
       addMarkers(lng=~longitude, 
                  lat=~latitude,
-                 popup=~paste0("Project Address: ",
-                               proj_add, 
-                               "<br/>ZIP: ",
-                               proj_zip, 
-                               "<br/>Annual dollar amount of tax credits allocated: ",
-                               allocamt, 
-                               "<br/>Total Number of Units: ",
-                               n_units),
+                 popup=~paste0("Project: ",
+                                 projectname,
+                                 "<br/>Project Address: ",
+                                 proj_add, 
+                                 "<br/>ZIP: ",
+                                 proj_zip, 
+                                 "<br/>Annual dollar amount of tax credits allocated: ",
+                                 allocamt, 
+                                 "<br/>Total Number of Units: ",
+                                 n_units),
                  clusterOptions = markerClusterOptions())
     })
   
@@ -74,7 +83,9 @@ server <- function(input, output, session) {
         addTiles() %>%
         addMarkers(lng=~longitude, 
                    lat=~latitude,
-                   popup=~paste0("Project Address: ",
+                   popup=~paste0("Project: ",
+                                 projectname,
+                                 "<br/>Project Address: ",
                                  proj_add, 
                                  "<br/>ZIP: ",
                                  proj_zip, 
