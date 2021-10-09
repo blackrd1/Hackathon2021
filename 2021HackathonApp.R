@@ -13,9 +13,6 @@ library(shiny)
 library(spDataLarge)
 library(RColorBrewer)
 
-setwd("~/Downloads/LIHTC")
-
-LIHTCPUB <- read_csv("LIHTCPUB.CSV")
 dat <- LIHTCPUB
 remove(LIHTCPUB)
 
@@ -49,14 +46,16 @@ names(nashdat)[names(nashdat)=='project']<-"projectname"
 
 # Define UI ----
 ui <- fluidPage(
-
-  ui <- navbarPage("Hackathon Project by Riley Black and Chloe Hall",
-                   tabPanel("Cluster", leafletOutput("NashvilleClusterMap")),
-                   tabPanel("Marker", leafletOutput("NashvilleMarkerMap")),
   
-  
+    titlePanel(h1("LIHTC Hackathon Map: By Riley Black and Chloe Hall")),
+    
+    mainPanel(
+           h3("Nashville Map"),
+           tabsetPanel(
+           tabPanel("Cluster", leafletOutput("NashvilleClusterMap")),
+           tabPanel("Marker", leafletOutput("NashvilleMarkerMap"))
   )
-)
+))
 
 # Define server logic ----
 server <- function(input, output, session) {
@@ -66,34 +65,34 @@ server <- function(input, output, session) {
       addMarkers(lng=~longitude, 
                  lat=~latitude,
                  popup=~paste0("Project: ",
-                                 projectname,
-                                 "<br/>Project Address: ",
-                                 proj_add, 
-                                 "<br/>ZIP: ",
-                                 proj_zip, 
-                                 "<br/>Annual dollar amount of tax credits allocated: ",
-                                 allocamt, 
-                                 "<br/>Total Number of Units: ",
-                                 n_units),
+                               projectname,
+                               "<br/>Project Address: ",
+                               proj_add, 
+                               "<br/>ZIP: ",
+                               proj_zip, 
+                               "<br/>Annual dollar amount of tax credits allocated: ",
+                               allocamt, 
+                               "<br/>Total Number of Units: ",
+                               n_units),
                  clusterOptions = markerClusterOptions())
-    })
+  })
   
-    output$NashvilleMarkerMap <- renderLeaflet({
-      leaflet(nashdat) %>%
-        addTiles() %>%
-        addMarkers(lng=~longitude, 
-                   lat=~latitude,
-                   popup=~paste0("Project: ",
-                                 projectname,
-                                 "<br/>Project Address: ",
-                                 proj_add, 
-                                 "<br/>ZIP: ",
-                                 proj_zip, 
-                                 "<br/>Annual dollar amount of tax credits allocated: ",
-                                 allocamt, 
-                                 "<br/>Total Number of Units: ",
-                                 n_units))})
-    
+  output$NashvilleMarkerMap <- renderLeaflet({
+    leaflet(nashdat) %>%
+      addTiles() %>%
+      addMarkers(lng=~longitude, 
+                 lat=~latitude,
+                 popup=~paste0("Project: ",
+                               projectname,
+                               "<br/>Project Address: ",
+                               proj_add, 
+                               "<br/>ZIP: ",
+                               proj_zip, 
+                               "<br/>Annual dollar amount of tax credits allocated: ",
+                               allocamt, 
+                               "<br/>Total Number of Units: ",
+                               n_units))})
+  
 }
 # Run the app ----
 shinyApp(ui = ui, server = server)
