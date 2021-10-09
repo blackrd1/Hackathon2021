@@ -13,6 +13,8 @@ library(shiny)
 library(spDataLarge)
 library(RColorBrewer)
 
+
+#ADD WORKING DIRECTORY AND LOADING OF CSV DATA IN HERE!!!!!!!!!!!!
 dat <- LIHTCPUB
 remove(LIHTCPUB)
 
