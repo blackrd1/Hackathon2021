@@ -53,3 +53,14 @@ NashvilleZipMap <- leaflet(nashdat) %>%
                            n_units))
 NashvilleZipMap
 ```
+sorting data into groups
+```{r}
+#creating categories for variables 
+nashdat <- nashdat %>%
+  mutate(n_units_sorted = case_when((n_units <= 10) ~ 'Group1',
+                                     (n_units >= 11 & n_units <= 50) ~ 'Group2',
+                                     (n_units >= 51 & n_units < 100) ~ 'Group3',
+                                     (n_units < 101) ~ 'Group4',
+                                     )
+  )
+```
