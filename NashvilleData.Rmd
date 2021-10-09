@@ -39,7 +39,6 @@ nashdat <- nashdat%>%
 ```
 initial map creation
 ```{r}
-```{r}
 NashvilleZipMap <- leaflet(nashdat) %>%
   addTiles() %>%
   addMarkers(lng=~longitude, 
@@ -53,5 +52,4 @@ NashvilleZipMap <- leaflet(nashdat) %>%
                            "<br/>Total Number of Units: ",
                            n_units))
 NashvilleZipMap
-```
 ```
