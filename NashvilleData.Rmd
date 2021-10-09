@@ -19,7 +19,12 @@ remove(LIHTCPUB)
 ```
 filtering 
 ```{r}
+#Filters to only Tennessee
 nashdat <- dat %>%
+  filter(proj_st=="TN")
+
+#Filters to only Nashville data
+nashdat <- nashdat %>%
   filter(proj_cty=="NASHVILLE")
   
   #Dropped NA for Project Addresses
