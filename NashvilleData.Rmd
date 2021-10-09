@@ -37,3 +37,11 @@ nashdat <- nashdat%>%
 nashdat <- nashdat%>%
   filter(yr_pis!= 9999 & yr_pis!= 8888)
 ```
+initial map creation
+```{r}
+NashvilleZipMap <- leaflet(nashdat) %>%
+  addTiles() %>%
+  addMarkers(lng=~longitude, 
+             lat=~latitude)
+NashvilleZipMap
+```
