@@ -47,17 +47,26 @@ names(nashdat)[names(nashdat)=='project']<-"projectname"
 
 # Define UI ----
 ui <- fluidPage(
-  
-    titlePanel(h1("Riley Black and Chloe Hall's Hackathon Project")),
+    
+    titlePanel(h1("Riley Black and Chloe Hall's Hackathon Map")),
     
     mainPanel(
-           h3("Low-Income Housing Tax Credit Properties Map"),
-           tabsetPanel(
-           tabPanel("Nashville Cluster", leafletOutput("NashvilleClusterMap")),
-           tabPanel("Nashville Marker", leafletOutput("NashvilleMarkerMap")),
-           tabPanel("Moon", leafletOutput("MoonMap"))
-  )
-))
+        h3("Low-Income Housing Tax Credit Properties Map"),
+        fluidRow("This map shows the distribution of low-income properties built in Nashville from 1987-2019."),
+        tabsetPanel(
+            tabPanel("Nashville Cluster", leafletOutput("NashvilleClusterMap"),
+                     fluidRow(
+                         "These clusters display areas of higher concentration of LIHTC units. Click on a cluster or zoom in to see how units are distributed!")),
+    
+            tabPanel("Nashville Marker", leafletOutput("NashvilleMarkerMap"),
+                     fluidRow(
+                         "These markers display each LIHTC property.Click on a marker to see the number of units and the tax dollars allocated!")),
+            tabPanel("Moon", leafletOutput("MoonMap"),
+                     h4(
+                         "There are no LIHTC properties on the moon."))
+        ),
+        h6("Low-Income Housing Tax credits are funds given to private developers by state or federal government to finance . This data comes from the HUD National Low Income Housing Tax Credit (LIHTC) Database 1987-2019 Data Dictionary")
+    ))
 
 # Define server logic ----
 server <- function(input, output, session) {
