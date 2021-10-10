@@ -52,7 +52,7 @@ ui <- fluidPage(
     
     mainPanel(
         h1("Low-Income Housing Tax Credit Properties Map"),
-        fluidRow("This interactive map shows the distribution of LIHTC properties built in Nashville from 1987-2019."),
+        fluidRow("This interactive map shows the density and distribution of LIHTC properties built in Nashville from 1987-2019."),
         br(),
         tabsetPanel(
             tabPanel("Nashville Cluster", leafletOutput("NashvilleClusterMap"),
