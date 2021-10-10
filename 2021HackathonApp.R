@@ -14,7 +14,6 @@ library(spDataLarge)
 library(RColorBrewer)
 
 
-#ADD WORKING DIRECTORY AND LOADING OF CSV DATA IN HERE!!!!!!!!!!!!
 dat <- LIHTCPUB
 remove(LIHTCPUB)
 
@@ -52,10 +51,11 @@ ui <- fluidPage(
     titlePanel(h1("LIHTC Hackathon Map: By Riley Black and Chloe Hall")),
     
     mainPanel(
-           h3("Nashville Map"),
+           h3("Low-Income Housing Tax Credit Properties Map"),
            tabsetPanel(
-           tabPanel("Cluster", leafletOutput("NashvilleClusterMap")),
-           tabPanel("Marker", leafletOutput("NashvilleMarkerMap"))
+           tabPanel("Nashville Cluster", leafletOutput("NashvilleClusterMap")),
+           tabPanel("Nashville Marker", leafletOutput("NashvilleMarkerMap")),
+           tabPanel("Moon", leafletOutput("MoonMap"))
   )
 ))
 
@@ -94,6 +94,11 @@ server <- function(input, output, session) {
                                allocamt, 
                                "<br/>Total Number of Units: ",
                                n_units))})
+  
+  output$MoonMap <- renderLeaflet({
+    leaflet() %>%
+      addTiles('https://s3.amazonaws.com/opmbuilder/301_moon/tiles/w/hillshaded-albedo/{z}/{x}/{y}.png')
+  })
   
 }
 # Run the app ----
