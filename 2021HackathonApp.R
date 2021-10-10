@@ -82,7 +82,7 @@ ui <- fluidPage(
 # Define server logic ----
 server <- function(input, output, session) {
   
-  colorB <- colorBin(palette="RdYlGn", domain=NULL, bins = c(0,2,10,50,200,1000), reverse =TRUE)
+  colorB <- colorBin(palette="RdYlGn", domain=NULL, bins = c(0,3,10,50,200,500,1000), reverse =TRUE)
   
   AnchorDown <- makeIcon(
     iconUrl = "https://www.logolynx.com/images/logolynx/f7/f7d08cb2999bf2d07c1c016555a64f16.png",
@@ -131,7 +131,12 @@ server <- function(input, output, session) {
       addMarkers(lat=36.14312813278591,
                  lng=-86.80566855798781,
                  icon=AnchorDown,
-                 popup='Anchor Down!')
+                 popup='Anchor Down!')%>%
+      addLegend("topright", 
+                pal = colorB, 
+                values = ~n_units,
+                title = "Number of Affordable Units",
+                opacity = 1)
   })
   
   output$MoonMap <- renderLeaflet({
