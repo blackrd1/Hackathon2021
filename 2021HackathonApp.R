@@ -13,7 +13,7 @@ library(shiny)
 library(spDataLarge)
 library(RColorBrewer)
 
-#ADD IN WORKING DIRECTORY 
+#ADD IN WORKING DIRECTORY
 dat <- LIHTCPUB
 remove(LIHTCPUB)
 
@@ -48,26 +48,36 @@ names(nashdat)[names(nashdat)=='project']<-"projectname"
 # Define UI ----
 ui <- fluidPage(
     
-    titlePanel(h1("Riley Black and Chloe Hall's Hackathon Map")),
+    titlePanel(h3("Riley Black and Chloe Hall's Vandy Hackathon Project")),
     
     mainPanel(
-        h3("Low-Income Housing Tax Credit (LIHTC) Properties Map"),
+        h1("Low-Income Housing Tax Credit Properties Map"),
         fluidRow("This interactive map shows the distribution of LIHTC properties built in Nashville from 1987-2019."),
+        br(),
         tabsetPanel(
             tabPanel("Nashville Cluster", leafletOutput("NashvilleClusterMap"),
-                     h5(
+                     h4(
                          "These clusters display areas of higher concentration of LIHTC units. Click on a cluster or zoom in to see how units are distributed!")),
             
             tabPanel("Nashville Marker", leafletOutput("NashvilleMarkerMap"),
-                     h5(
+                     h4(
                          "These markers display each LIHTC property.Click on a marker to see the number of units and the tax dollars allocated!")),
             tabPanel("Moon", leafletOutput("MoonMap"),
                      h3(
                          "There are no LIHTC properties on the moon."),
-                     h5("(yet)"))
+                     h6("(yet)"))
         ),
-        fluidRow("Low-Income Housing Tax credits are funds given to private developers by the state or local government to finance qualifying projects that fit guidelines of affordability and create new housing units for low income tenants. This program helps fill the market need for low income housing that is often unadressed by the private development market. This data comes from the HUD National Low Income Housing Tax Credit (LIHTC) Database 1987-2019 Data Dictionary. For more information, visit https://www.huduser.gov/portal/datasets/lihtc.html")
-    ))
+        fluidRow("This data comes from the HUD National Low Income Housing Tax Credit (LIHTC) Database 1987-2019 Data Dictionary."),
+        fluidRow("For more information, visit https://www.huduser.gov/portal/datasets/lihtc.html")
+    ),
+        sidebarPanel(
+            h4("What is a LIHTC?"),
+            fluidRow("Low-Income Housing Tax credits are funds given to private developers by the state or local government to finance qualifying housing developments that fit guidelines of affordability and create new rental units for low income tenants."), 
+                     br(),
+                     fluidRow("This program helps fill the market need for low income housing that is often unadressed by the private development market.")
+            ),
+    
+    )
 
 # Define server logic ----
 server <- function(input, output, session) {
