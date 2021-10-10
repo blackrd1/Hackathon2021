@@ -98,8 +98,8 @@ server <- function(input, output, session) {
                                      proj_zip, 
                                      "<br/>Annual dollar amount of tax credits allocated: $",
                                      allocamt, 
-                                     "<br/>Total Number of Units: ",
-                                     n_units),
+                                     "<br/>Total Number of Affordable Units: ",
+                                     li_units),
                        clusterOptions = markerClusterOptions()) %>%
             addMarkers(lat=36.14312813278591,
                        lng=-86.80566855798781,
@@ -120,8 +120,8 @@ server <- function(input, output, session) {
                                      proj_zip, 
                                      "<br/>Annual dollar amount of tax credits allocated: $",
                                      allocamt, 
-                                     "<br/>Total Number of Units: ",
-                                     n_units)) %>%
+                                     "<br/>Total Number of Affordable Units: ",
+                                     li_units)) %>%
             addMarkers(lat=36.14312813278591,
                        lng=-86.80566855798781,
                        icon=AnchorDown,
