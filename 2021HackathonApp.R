@@ -57,7 +57,7 @@ ui <- fluidPage(
         tabsetPanel(
             tabPanel("Nashville Cluster", leafletOutput("NashvilleClusterMap"),
                      h4(
-                         "These clusters display areas of higher concentration of LIHTC units. Click on a cluster or zoom in to see how units are distributed!")),
+                         "These clusters display areas of higher concentration of LIHTC developments. Click on a cluster or zoom in to see how developments are distributed!")),
             
             tabPanel("Nashville Marker", leafletOutput("NashvilleMarkerMap"),
                      h4(
