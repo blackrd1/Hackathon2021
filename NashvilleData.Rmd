@@ -1,5 +1,7 @@
 packages
 ```{r}
+install.packages("spDataLarge", repos = "https://nowosad.github.io/drat/", type = "source")
+
 library(tidyverse)
 library(dplyr)
 library(readr)
